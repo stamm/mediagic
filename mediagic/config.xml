@@ -10,12 +10,12 @@
 	<mediagic_db>
 		<server>localhost</server>
 		<username>mythtv</username>
-		<password>вписасть_сюда_пароль</password>
+		<password>%S_DB_PASSWORD</password>
 		<db_name>mediagic</db_name>
 	</mediagic_db>
 
 	<!-- User agent браузера, можно посмотреть по ссылке http://whatsmyuseragent.com/ -->
-	<user_agent>Opera/9.80 (Macintosh; Intel Mac OS X; U; en) Presto/2.2.15 Version/10.00</user_agent>
+	<user_agent>Opera/9.80 (X11; Linux x86_64; U; ru) Presto/2.7.62 Version/11.00</user_agent>
 
 
 	<directories>
@@ -23,10 +23,10 @@
 		<tmp>/tmp/</tmp>
 		
 		<!-- директория, где будут храниться обложки. Должен быть доступ на запись -->
-		<coverarts>/home/вашеимя/.mythtv/MythVideo/</coverarts>
+		<coverarts>%S_HOME/.mythtv/MythVideo/</coverarts>
 		
 		<!-- директория для удалённых файлов. Должен быть доступ на запись -->
-		<trash>/home/вашеимя/.local/share/Trash/files/</trash>
+		<trash>%S_HOME/.local/share/Trash/files/</trash>
 	</directories>
 	
 	<coverart>
@@ -48,7 +48,7 @@
 		<!-- сервер,юзернейм,пароль,имя базы данных для MythTV -->
 		<server>localhost</server>
 		<username>mythtv</username>
-		<password>вписасть_сюда_пароль</password>
+		<password>%S_DB_PASSWORD</password>
 		<db_name>mythconverg</db_name>
 	</mythtv>
 	
@@ -58,24 +58,24 @@
 		<encoding>UTF-8</encoding>
 		<!-- рекомендую создать gmail-аккаунт специально для сервера -->
 		<!-- имя пользователя почтового аккаунта для сервера-->
-		<username>servername@gmail.com</username>
+		<username>%S_MAIL</username>
 		<!-- пароль почтового аккаунта-->
-		<password>password</password>
+		<password>%S_MAIL_PASSWORD</password>
 
 		<!-- на какой адрес слать уведомления-->
 		<send_to>
 			<!-- адрес-->
-			<email>yourname@yourmail.com</email>
+			<email>%S_MAIL_TO</email>
 			<!-- ваше имя-->
-			<name>Vasily Pupkin</name>
+			<name>%S_NAME</name>
 		</send_to>
 
 		<!-- от какого имени слать уведомления-->
 		<send_from>
 			<!-- имя-->
-			<name>Server Name</name>
+			<name>Медиаджик</name>
 			<!-- адрес-->
-			<email>servername@gmail.com</email>
+			<email>%S_MAIL</email>
 			<!-- тип отправки. Используйте тип "mail", если у вас настроеный mail-сервер, или "smtp" чтобы слать письма используя методы Медиаджика -->
 			<!-- если вы не понимаете о чём я говорю - пишите "smtp" -->
 			<type>smtp</type>

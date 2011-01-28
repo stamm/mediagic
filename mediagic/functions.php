@@ -68,6 +68,7 @@ function getXMLByFilename($filename)
 {
 	$doc = new DOMDocument();
 	$doc->strictErrorChecking = FALSE;
+	echo $filename;
 	$doc->load($filename);
 	//$doc = preg_replace("/>\s*/", ">", $doc);
 	//$doc = preg_replace("/\s*</", "<", $doc);
@@ -145,6 +146,7 @@ function getFilesByRequest()
 function getMySQLResult ($server, $username, $password, $db, $q, $closeConnection=true) {
 	$conn = mysql_connect($server, $username, $password);
 	mysql_select_db($db);
+	mysql_query("SET NAMES 'utf8'");
 	$res = mysql_query($q);
 	if ($closeConnection == true)
 		mysql_close($conn);

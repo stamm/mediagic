@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Название, тип, кодировка трекера. Enable=0 запрещает использование этого конфигурационного файла -->
+<tracker name="Rutracker" type='Video' enable='1' encoding='cp1251'>
+
+	<!-- ваши cookies, можно посмотреть в Опере кликнув правой кнопкой на сайте и выбрав "Site preferences"-->
+	<cookies>
+		<phpbb3_cqeo2_u></phpbb3_cqeo2_u>
+		<phpbb3_cqeo2_k></phpbb3_cqeo2_k>
+		<phpbb3_cqeo2_sid></phpbb3_cqeo2_sid>
+		<uid></uid>
+		<pass></pass>
+		<PHPSESSID></PHPSESSID>
+		<session></session>
+		<mybbuser></mybbuser>
+		<hsdn_top></hsdn_top>
+		<bb_data>1-1817419-tfSmFiXweMYSbvDvFNUg-1298054195-1295397755-1295397755-1604819035-1</bb_data>
+		<bt_t>a:10:{i:3336781;i:1293379959;i:3177973;i:1293969459;i:3165969;i:1293659075;i:3124766;i:1293221776;i:3349625;i:1294072947;i:3304996;i:1293988676;i:3348962;i:1294132325;i:3354270;i:1294319428;i:1592533;i:1294859350;i:3218134;i:1295302426;}</bt_t>
+	</cookies>
+
+	<!-- качать только если сидов больше чем это кол-во -->
+	<minimum_number_of_seeds>10</minimum_number_of_seeds>
+
+
+	<!-- фильтры -->
+	<filters>
+		<!-- не качать всё, что содержит в своём названии следующие слова-->
+		<decline>Supernatural</decline>
+		<decline>прожектор</decline>
+		<decline>Остаться в живых</decline>
+		<decline>LOST</decline>
+		<decline>LostFilm.TV</decline>
+		<decline>TS</decline>
+		<decline>Cam</decline>
+		<decline>Наша раша</decline>
+		<decline>Наша Russia</decline>
+		<decline>Lost.</decline>
+		<decline>Даёшь Молодёжь</decline>
+		<decline>Даешь Молодежь</decline>
+
+		<!-- минимальный и максимальный размер файла в мегабайтах-->
+	 	<max_size>5120</max_size>
+	 	<min_size>80</min_size>
+	</filters>
+
+	<directories>
+		<!-- Директория, в которую нужно сохранять торрент-файлы-->
+		<!-- Внимание! торрент-клиент должен быть настроен на поиск новых торрент-файлов в этой директории-->
+		<torrents_dir>/home/stamm/torrents/</torrents_dir>
+
+		<!-- Директория, в которую торрент-клиент скачивает файлы-->
+		<datafiles_dir>/var/lib/mythtv/videos/downloads/</datafiles_dir>
+	</directories>
+
+<!-- дальше лучше не трогать, правда :) -->
+<!-- дальше лучше не трогать, правда :) -->
+<!-- дальше лучше не трогать, правда :) -->
+<!-- дальше лучше не трогать, правда :) -->
+<!-- дальше лучше не трогать, правда :) -->
+<!-- дальше лучше не трогать, правда :) -->
+
+	<!-- локальный путь к логотипу -->
+	<logo>images/dt.jpg</logo>
+	
+	<scrubbers>
+		<!-- искать информацию о фильмах: да - 1, нет - 0 -->
+		<automatic>1</automatic>
+		<!-- дефолтный скраббер -->
+		<default>1Rutracker</default>	
+		<!-- релевантный скраббер -->
+		<relevant>1Rutracker</relevant>
+	</scrubbers>
+
+	<search>
+		<!-- строка поиска -->
+		<url>http://rutracker.org/forum/tracker.php</url>
+		<post>prev_my=0&amp;prev_new=0&amp;prev_oop=0&amp;f[]=-1&amp;o=10&amp;s=2&amp;tm=-1&amp;pn=&amp;nm=%title&amp;submit=%CF%EE%E8%F1%EA</post>
+		<referer>http://rutracker.org/forum/tracker.php</referer>
+		<!-- номер первой страницы-->
+		<start_page_number>0</start_page_number>
+		<!-- увеличивать номер страницы на-->
+		<page_increament>1</page_increament>
+	</search>
+
+	<regexp>
+		<!-- регексп для выборки торрент_ид-->
+		<torrent_id>/t=(\d+)/</torrent_id>
+	</regexp>
+
+	<!-- это xpath. а вы что думали? эта херь говорит как парсить страницу с результатами поиска-->
+	<xpath>
+		<search_results>//table[@id="tor-tbl"]/tbody/tr</search_results>
+		<title>td[4]/div[1]/a</title>
+		<size>td[6]/a[1]</size>
+		<torrent_file_url>td[4]/div[1]/a[1]</torrent_file_url>
+		<details_url>td[4]/div[1]/a[1]</details_url>
+		<seeds_count>td[7]/b</seeds_count>
+	</xpath>
+</tracker>

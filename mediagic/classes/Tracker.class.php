@@ -80,7 +80,13 @@ class Tracker
 			$search_url = trim($this->search->url);
 			$search_url = str_replace('%title',urlencode($search),$search_url);
 			$search_url = str_replace('%page',$page,$search_url);
-			$my_curl = new MyCurl($search_url, $this->cookies, $this->encoding);
+#var_dump($this->search->post);
+			$post = str_replace('%title',urlencode($search),$this->search->post);
+			$post = str_replace('&amp;', '&', $post);
+#var_dump($post);
+			parse_str($post, $post);
+#var_dump($post);
+			$my_curl = new MyCurl($search_url, $this->cookies, $this->encoding, false, $post, $this->search->referer);
 			try {
 				$data = $my_curl -> getData();
 			} catch (Exception $e) {
@@ -91,9 +97,9 @@ class Tracker
 				echo SP;
 			$data = str_replace( "<br />", " ", $data ); // hack to avoid a problem with getting values near <br />
 			$xml = getXMLByDataHTML( $data );
-
+			#file_put_contents('xml_data', print_r($xml, 1));
 			$search_results = $xml->xpath( $this->xpath->search_results );
-	
+			#echo $this->xpath->search_results;
 			if ( !is_array($search_results) )
 				throw new Exception('Downloaded page doesn\'t contain any search results',2);
 	
@@ -143,15 +149,21 @@ class Tracker
 				
 	
 				$size = $value->xpath($this->xpath->size);
-				preg_match("/(\d*\.*\d*)\s*(\D*)/", $size[0], $size_res);
-				if ($size_res['2'] == 'GB')
+#var_dump($size);
+				$size[0] = mb_strtolower($size[0]);
+				$size[0] = str_replace(array('&#8595;', '↓'), '', $size[0]);
+				#$size[0] = str_replace(array('&nbsp;', chr(160)), ' ', $size[0]);
+#var_dump($size);
+				preg_match('/(\d+(?:[.,]\d+)?).*?(\w+)/', trim($size[0]), $size_res);
+#var_dump($size_res);
+				$size_res[1] = str_replace(',', '.', $size_res[1]);
+				if (in_array(mb_strtolower($size_res['2']), array('gb', 'гб')))
 					$size = $size_res[1]*1024;
-				elseif ($size_res['2'] == 'kB' || $size_res['2'] == 'KB')
+				elseif (in_array(mb_strtolower($size_res['2']), array('kb', 'кб')))
 					$size = $size_res[1]/1024;
 				else
 					$size = $size_res[1];
-					
-
+#var_dump($size);
 				foreach ($this->filters->decline as $k=>$v)
 				{
 					if (mb_stripos($title, (string)$v)!==false){

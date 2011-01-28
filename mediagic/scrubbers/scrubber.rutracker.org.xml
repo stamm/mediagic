@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<scrubber name="Rutracker" type='Video' enable='1' encoding='cp1251'>
+
+	<!-- ваши cookies, можно посмотреть в Опере кликнув правой кнопкой на сайте и выбрав "Site preferences"-->
+	<cookies>
+		<phpbb3_cqeo2_u></phpbb3_cqeo2_u>
+		<phpbb3_cqeo2_k></phpbb3_cqeo2_k>
+		<phpbb3_cqeo2_sid></phpbb3_cqeo2_sid>
+		<uid></uid>
+		<pass></pass>
+		<PHPSESSID></PHPSESSID>
+		<session></session>
+		<mybbuser></mybbuser>
+		<hsdn_top>1</hsdn_top>
+		<bb_data>1-1817419-uGl1wlcEApUBWYEFNr0M-1298054195-1295381558-1295381558-2640045119-1</bb_data>
+	</cookies>
+
+<!-- дальше лучше не трогать, правда :) -->
+<!-- дальше лучше не трогать, правда :) -->
+<!-- дальше лучше не трогать, правда :) -->
+<!-- дальше лучше не трогать, правда :) -->
+<!-- дальше лучше не трогать, правда :) -->
+<!-- дальше лучше не трогать, правда :) -->
+
+
+	<priority>10</priority>
+	
+	<search>
+		<page>
+			<url>http://rutracker.org/forum/tracker.php</url>
+			<post>o=10&nm=%title</post>
+			<info>
+				<xpath>//table[@id="ajax_table"]/tr[position() &gt; 3 and position() &lt; last()]/td[2]/a[1]/@href</xpath>
+				<regexp name="id">/href="/(\d+)"/</regexp>
+			</info>
+		</page>
+		<page>
+			<url>http://torrents.tvoynet.ru/%id</url>
+			<info>
+				<xpath>//td[text()="Описание"]/following-sibling::*[1]</xpath>
+				<regexp name="year">/^\s*(?:Год|Год выхода|Год выпуска)\s*\:\s*(\d{4}).*$/mi</regexp>
+				<regexp name="genres">/^\s*Жанр\s*\:\s*(.*)\s*$/mi</regexp>
+				<regexp name="countries">/^\s*(?:Страна|Выпущено)\s*\:\s*(.*)\s*$/mi</regexp>
+				<regexp name="directors">/^\s*Режиссер\s*\:\s*(.*)\s*$/mi</regexp>
+				<regexp name="cast">/^\s*(?:В ролях|Актеры|В главных ролях)\s*\:\s*(.*)\s*$/mi</regexp>
+				<regexp name="userrating">/^\s*(?:IMDB\s*\:?|Рейтинг фильма\s*\:|Рейтинг\s*\:)\s*(.*)\s*$/mi</regexp>
+				<regexp name="translation">/^\s*(?:Перевод|Озвучивание)\s*\:\s*(.*)\s*$/mi</regexp>
+				<regexp name="audio">/^\s*(?:Звук|Аудио)\s*\:\s*(.*)\s*$/mi</regexp>
+				<regexp name="length">/^\s*(?:Продолжительность|Время)\s*\:\s*(.*)\s*$/mi</regexp>
+				<regexp name="plot">/.*(?:Описание\s*\:\s*|О фильме\s*\:\s*|В ролях\s*\:[^\n]*)((?U).*)\s*(?:^\s*IMDB|^\s*Выпущено\:|^\s*Продолжительность\:|^\s*Рейтинг фильма\:|^\s*Качество\:|^\s*Жанр\:|^\s*Формат\:\z)/smi</regexp>
+				<regexp name="video">/^\s*(?:Видео)\s*\:\s*(.*)\s*$/mi</regexp>
+			</info>
+			<info>
+				<xpath>//td[text()="Описание"]/following-sibling::*[1]/img[1]/@src</xpath>
+				<regexp name="coverimage">/src="(.*)"/mi</regexp>
+			</info>
+		</page>
+	</search>
+
+	<check_countries>1</check_countries>
+
+	<unknown>Неизвестно</unknown>
+
+</scrubber>

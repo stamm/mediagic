@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Название, тип, кодировка трекера. Enable=0 запрещает использование этого конфигурационного файла -->
+<tracker name="TvoynetTorrents" type='Video' enable='1' encoding='cp1251'>
+
+	<!-- ваши cookies, можно посмотреть в Опере кликнув правой кнопкой на сайте и выбрав "Site preferences"-->
+	<cookies>
+		<phpbb3_cqeo2_u></phpbb3_cqeo2_u>
+		<phpbb3_cqeo2_k></phpbb3_cqeo2_k>
+		<phpbb3_cqeo2_sid></phpbb3_cqeo2_sid>
+		<uid>2</uid>
+		<pass>877d507917bb4fe2a350cff31e3e5a62</pass>
+		<PHPSESSID>025c0d1b47c1ffb2a3b75a4b20e5fdbe</PHPSESSID>
+		<session></session>
+		<mybbuser></mybbuser>
+		<hsdn_top></hsdn_top>
+	</cookies>
+
+	<!-- качать только если сидов больше чем это кол-во -->
+	<minimum_number_of_seeds>10</minimum_number_of_seeds>
+
+
+	<!-- фильтры -->
+	<filters>
+		<!-- не качать всё, что содержит в своём названии следующие слова-->
+		<decline>Supernatural</decline>
+		<decline>прожектор</decline>
+		<decline>Остаться в живых</decline>
+		<decline>LOST</decline>
+		<decline>LostFilm.TV</decline>
+		<decline>TS</decline>
+		<decline>Cam</decline>
+		<decline>Наша раша</decline>
+		<decline>Наша Russia</decline>
+		<decline>Lost.</decline>
+		<decline>Даёшь Молодёжь</decline>
+		<decline>Даешь Молодежь</decline>
+
+		<!-- минимальный и максимальный размер файла в мегабайтах-->
+	 	<max_size>5120</max_size>
+	 	<min_size>80</min_size>
+	</filters>
+
+	<directories>
+		<!-- Директория, в которую нужно сохранять торрент-файлы-->
+		<!-- Внимание! торрент-клиент должен быть настроен на поиск новых торрент-файлов в этой директории-->
+		<torrents_dir>/home/stamm/torrents/</torrents_dir>
+
+		<!-- Директория, в которую торрент-клиент скачивает файлы-->
+		<datafiles_dir>/var/lib/mythtv/videos/downloads/</datafiles_dir>
+	</directories>
+
+<!-- дальше лучше не трогать, правда :) -->
+<!-- дальше лучше не трогать, правда :) -->
+<!-- дальше лучше не трогать, правда :) -->
+<!-- дальше лучше не трогать, правда :) -->
+<!-- дальше лучше не трогать, правда :) -->
+<!-- дальше лучше не трогать, правда :) -->
+
+	<!-- локальный путь к логотипу -->
+	<logo>images/dt.jpg</logo>
+	
+	<scrubbers>
+		<!-- искать информацию о фильмах: да - 1, нет - 0 -->
+		<automatic>1</automatic>
+		<!-- дефолтный скраббер -->
+		<default>TvoynetTorrents</default>	
+		<!-- релевантный скраббер -->
+		<relevant>TvoynetTorrents</relevant>
+	</scrubbers>
+
+	<search>
+		<!-- строка поиска -->
+		<url>http://torrents.tvoynet.ru/search/?search=%title&amp;incldead=1&amp;cat[]=1&amp;cat[]=2&amp;cat[]=72&amp;sort=7&amp;type=desc&amp;page=%page</url>
+		<!-- номер первой страницы-->
+		<start_page_number>0</start_page_number>
+		<!-- увеличивать номер страницы на-->
+		<page_increament>1</page_increament>
+	</search>
+
+	<regexp>
+		<!-- регексп для выборки торрент_ид-->
+		<torrent_id>/id=(\d+)$/</torrent_id>
+	</regexp>
+
+	<!-- это xpath. а вы что думали? эта херь говорит как парсить страницу с результатами поиска-->
+	<xpath>
+		<!--<search_results>//table[@id="ajax_table"]/tr</search_results>-->
+		<!--<search_results>//table[@id="ajax_table"]/tr[2]/following::*</search_results>-->
+		<!--<search_results><![CDATA[//table[@id="ajax_table"]/tr[position() > 2 and position() < (last()-1)] ]]</search_results>-->
+		<search_results>//table[@id="ajax_table"]/tr[position() &gt; 3 and position() &lt; last()]</search_results>
+		<title>td[2]/a[1]/b[1]</title>
+		<size>td[4]/a[1]</size>
+		<torrent_file_url>td[4]/a[1]</torrent_file_url>
+		<details_url>td[2]/a[1]/b[1]</details_url>
+		<seeds_count>td[5]/b[1]/a[1]</seeds_count>
+	</xpath>
+</tracker>

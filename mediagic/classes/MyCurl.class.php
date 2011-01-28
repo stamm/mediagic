@@ -4,17 +4,20 @@ class MyCurl {
 	private $response;
 	private $response_meta_info;
     private $url;
+	private $post;
     private $cookies;
 	private $raw;
+	private $referer;
 	private $encoding;
 	private $user_agent;
 	
-	function __construct($url, $cookies='',  $encoding='UTF-8', $raw=false) {
+	function __construct($url, $cookies='',  $encoding='UTF-8', $raw=false, $post=false) {
     	$this->url = $url;
     	$this->cookies = $cookies;
     	$this->raw = $raw;
     	$this->encoding = $encoding;
     	$this->user_agent = $GLOBALS['config']->user_agent;
+		$this->post = $post;
 	}
 	
 	function getData()
@@ -31,6 +34,18 @@ class MyCurl {
 		if ( !empty( $this->cookies ) ) curl_setopt($ch, CURLOPT_COOKIE, $this->cookies);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Expect:"));
 		curl_setopt($ch, CURLOPT_USERAGENT, $this->user_agent);
+		if ($this->post)
+		{
+			curl_setopt($ch, CURLOPT_POST, 1);
+			$postString = http_build_query($this->post);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $postString);
+		}
+
+/*		if ($this->referer)
+		{
+			#curl_setopt($ch, CURLOPT_REFERER, $this->referer);
+		}*/
+
 		if ($this->raw==true)
 		{
 			curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
@@ -42,6 +57,7 @@ class MyCurl {
 			//echo $this->response;
 			//die();
 		}
+		file_put_contents('page.html', $this->response);
 		if ( empty( $this->response ) ) {
 			throw new Exception('ERROR: Can\'t download requested URL');
 		}
