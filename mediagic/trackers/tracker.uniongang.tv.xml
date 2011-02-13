@@ -4,15 +4,9 @@
 
 	<!-- ваши cookies, можно посмотреть в Опере кликнув правой кнопкой на сайте и выбрав "Site preferences"-->
 	<cookies>
-		<phpbb3_cqeo2_u></phpbb3_cqeo2_u>
-		<phpbb3_cqeo2_k></phpbb3_cqeo2_k>
-		<phpbb3_cqeo2_sid></phpbb3_cqeo2_sid>
 		<new_uid></new_uid>
-		<new_pass2>877d507917bb4fe2a350cff31e3e5a62</new_pass2>
-		<PHPSESSID>025c0d1b47c1ffb2a3b75a4b20e5fdbe</PHPSESSID>
-		<session></session>
-		<mybbuser></mybbuser>
-		<hsdn_top></hsdn_top>
+		<new_pass2></new_pass2>
+		<PHPSESSID></PHPSESSID>
 	</cookies>
 
 	<!-- качать только если сидов больше чем это кол-во -->
